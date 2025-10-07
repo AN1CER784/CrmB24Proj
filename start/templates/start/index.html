@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+	<h3>Здравствуйте, <strong>{{ request.bitrix_user.first_name }} {{ request.bitrix_user.last_name }}</strong>!</h3>
+{% endblock %}
+  

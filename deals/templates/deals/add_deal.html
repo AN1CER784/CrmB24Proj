@@ -1,0 +1,76 @@
+
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .form-container { max-width: 720px; margin: 0 auto; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid .full { grid-column: 1 / -1; }
+  .form-field label { display:block; margin: 4px 0; font-weight: 600; }
+  .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 8px; }
+  .help { color: #777; font-size: 12px; margin-top: 4px; }
+  .errors { color: #b00020; margin-bottom: 8px; }
+  #add-deal-button { margin-top: 16px; padding: 10px 14px; }
+</style>
+
+<div class="form-container">
+  <h2>Создать сделку</h2>
+
+  <form id="add_deal_form" action="{% url 'deals:add_deal' %}" method="POST">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="grid">
+      <div class="form-field full">
+        {{ form.TITLE.label_tag }}{{ form.TITLE }}
+        {{ form.TITLE.errors }}
+      </div>
+
+      <div class="form-field">
+        {{ form.CURRENCY_ID.label_tag }}{{ form.CURRENCY_ID }}
+        {{ form.CURRENCY_ID.errors }}
+      </div>
+
+      <div class="form-field">
+        {{ form.OPPORTUNITY.label_tag }}{{ form.OPPORTUNITY }}
+        {{ form.OPPORTUNITY.errors }}
+      </div>
+    
+      <div class="form-field">
+        {{ form.BEGINDATE.label_tag }}{{ form.BEGINDATE }}
+        {{ form.BEGINDATE.errors }}
+      </div>
+
+      <div class="form-field">
+        {{ form.CLOSEDATE.label_tag }}{{ form.CLOSEDATE }}
+        {{ form.CLOSEDATE.errors }}
+      </div>
+
+      <div class="form-field">
+        {{ form.UF_CRM_1759862274.label_tag }}{{ form.UF_CRM_1759862274 }}
+        {{ form.UF_CRM_1759862274.errors }}
+      </div>
+
+      <div class="form-field">
+        {{ form.TYPE_ID.label_tag }}{{ form.TYPE_ID }}
+        {{ form.TYPE_ID.errors }}
+        {% if form.TYPE_ID.help_text %}<div class="help">{{ form.TYPE_ID.help_text }}</div>{% endif %}
+      </div>
+	    
+
+
+      <div class="form-field full">
+        {{ form.COMMENTS.label_tag }}{{ form.COMMENTS }}
+        {{ form.COMMENTS.errors }}
+      </div>
+    
+    
+
+    </div>
+
+    <button type="submit" id="add-deal-button">Добавить</button>
+  </form>
+</div>
+{% endblock %}
